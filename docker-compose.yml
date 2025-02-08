@@ -1,0 +1,44 @@
+version: "3"
+services:
+  frontend:
+    build: ./frontend # Assuming your frontend is in the 'frontend' directory
+    ports:
+      - "3000:3000" # Expose port 3000 for frontend
+    depends_on:
+      - backend
+    environment:
+      - REACT_APP_API_URL=http://backend:8000/api # API endpoint for frontend
+
+  backend:
+    build: ./backend # Build the backend from the Dockerfile
+    ports:
+      - "8000:8000" # Expose port 8000 for backend
+    environment:
+      - DB_HOST=mysql # Database host (service name in Docker)
+      - DB_USER=root
+      - DB_PASSWORD=12345
+      - DB_NAME=pocket_game
+    depends_on:
+      - mysql
+    networks:
+      - pocket-game-network
+
+  mysql:
+    image: mysql:5.7 # MySQL image version 5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: 12345
+      MYSQL_DATABASE: pocket_game # The database name
+    volumes:
+      - mysql-data:/var/lib/mysql # Persist MySQL data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql # Mount init.sql to run when MySQL starts
+    ports:
+      - "3306:3306" # Expose port 3306 for MySQL
+    networks:
+      - pocket-game-network
+
+volumes:
+  mysql-data:
+
+networks:
+  pocket-game-network:
+    driver: bridge

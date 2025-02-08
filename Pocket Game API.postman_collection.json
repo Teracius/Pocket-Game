@@ -1,0 +1,73 @@
+{
+	"info": {
+		"_postman_id": "c235493b-d911-4e26-a294-5ec66835b65d",
+		"name": "Pocket Game API",
+		"description": "API created to start a poker game.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "41945890"
+	},
+	"item": [
+		{
+			"name": "Start Game",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"players\": [\"Ivan\", \"Armando\", \"Teran\", \"Lerma\"]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/games/start-game",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"games",
+						"start-game"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Games",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8000/api/games",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"games"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
